@@ -58,7 +58,7 @@ echo "ethe" > configs/c1.1/strings/0x409/configuration
 mkdir strings/0x409
 echo "" > strings/0x409/serialnumber
 echo "Sunplus" > strings/0x409/manufacturer
-echo "SP7021" > strings/0x409/product
+echo "SP7350" > strings/0x409/product
 
 mkdir functions/ncm.usb0
 echo $HOST_MAC > functions/ncm.usb0/host_addr
@@ -66,7 +66,7 @@ echo $DEV_MAC > functions/ncm.usb0/dev_addr
 ln -s functions/ncm.usb0 configs/c1.1
 
 # bind UDC
-echo "9c102800.usb" > UDC
+echo $(ls /sys/class/udc | cut -f1 | head -n1) > UDC
 
 # set ip
 ifconfig lo up

@@ -57,7 +57,7 @@ echo 1 > ${LUN0_PATH}/removable
 echo 0 > ${LUN0_PATH}/ro
 
 # bind udc
-echo "9c102800.usb" > UDC
+echo $(ls /sys/class/udc | cut -f1 | head -n1) > UDC
 
 # switch udc to device
 switch_udc 0

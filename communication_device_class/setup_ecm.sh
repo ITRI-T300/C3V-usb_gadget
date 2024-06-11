@@ -16,7 +16,7 @@ DEV_MAC=e6:76:ec:05:28:f3
 DEV_IP=192.168.10.20
 
 # insmod $CONFIGFS
-insmod $USB_U_SERIAL
+# insmod $USB_U_SERIAL
 insmod $COMPOSITE
 insmod $U_ETHER
 insmod $USB_F_ECM
@@ -57,7 +57,7 @@ echo "ethe" > configs/c1.1/strings/0x409/configuration
 mkdir strings/0x409
 echo "" > strings/0x409/serialnumber
 echo "Sunplus" > strings/0x409/manufacturer
-echo "SP7021" > strings/0x409/product
+echo "SP7350" > strings/0x409/product
 
 mkdir functions/ecm.usb0
 echo "22:aa:8b:ef:7d:c0" > functions/ecm.usb0/host_addr
@@ -65,7 +65,7 @@ echo "e6:76:ec:05:28:f3" > functions/ecm.usb0/dev_addr
 ln -s functions/ecm.usb0 configs/c1.1
 
 # bind UDC
-echo "9c102800.usb" > UDC
+echo $(ls /sys/class/udc | cut -f1 | head -n1) > UDC
 
 # set ip
 ifconfig lo up

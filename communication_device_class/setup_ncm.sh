@@ -13,7 +13,7 @@ U_NCM=$FUNCTION_PATH/usb_f_ncm.ko
 
 HOST_MAC=22:aa:8b:ef:7d:c0
 DEV_MAC=e6:76:ec:05:28:f3
-DEV_IP=192.168.10.20
+DEV_IP=192.168.20.20
 
 # insmod $CONFIGFS
 insmod $COMPOSITE
@@ -26,7 +26,7 @@ insmod $U_NCM
 echo 0 > /sys/module/sunplus_udc/parameters/dmsg
 
 mkdir -p /sys/kernel/config 
-# mount -t configfs none /sys/kernel/config  
+mount -t configfs none /sys/kernel/config
 cd /sys/kernel/config/usb_gadget
 
 # create gadget folder
@@ -38,7 +38,7 @@ mkdir g1
 cd g1
 
 echo 64 > bMaxPacketSize0  
-echo 0x200 > bcdUSB
+echo 0x300 > bcdUSB
 echo 0x100 > bcdDevice
 
 echo 0x0525	> idVendor    
@@ -56,9 +56,9 @@ mkdir -p configs/c1.1/strings/0x409
 echo "ethe" > configs/c1.1/strings/0x409/configuration
 
 mkdir strings/0x409
-echo "" > strings/0x409/serialnumber
+echo "5678" > strings/0x409/serialnumber
 echo "Sunplus" > strings/0x409/manufacturer
-echo "SP7350" > strings/0x409/product
+echo "SP7350 USB3.0 NCM Ethernet Gadget" > strings/0x409/product
 
 mkdir functions/ncm.usb0
 echo $HOST_MAC > functions/ncm.usb0/host_addr
